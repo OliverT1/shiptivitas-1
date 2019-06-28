@@ -25,11 +25,11 @@ export default class Board extends React.Component {
   handleDrop(el, target, source) {
       el.classList.remove('Card-grey', 'Card-blue', 'Card-green');
       console.log(this.swimlanes.backlog);
-      console.log(target.getAttribute('ref'));
-      if(target.getAttribute('ref')===this.swimlanes.backlog){
+      console.log(target);
+      if(target===this.swimlanes.backlog){
           el.classList.add('Card-grey');
       }
-      else if(target.getAttribute('ref')===this.swimlanes.inProgress){
+      else if(target===this.swimlanes.inProgress){
           el.classList.add('Card-blue');
       } else{
           el.classList.add('Card-green');
