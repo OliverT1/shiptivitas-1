@@ -12,7 +12,7 @@ export default class Board extends React.Component {
       clients: {
         backlog: clients.filter(client => !client.status || client.status === 'backlog'),
         inProgress: clients.filter(client => client.status && client.status === 'in-progress'),
-        complete: clients.filter(client => client.status && client.status === 'complete'),
+       complete: clients.filter(client => client.status && client.status === 'complete'),
       }
     }
     this.swimlanes = {
@@ -22,9 +22,27 @@ export default class Board extends React.Component {
     }
   }
 
-  componentDidMount() {
-     Dragula([this.swimlanes.backlog, this.swimlanes.inProgress, this.swimlanes.complete]);
+  handleDrop(el, target, source) {
+      el.classList.remove('Card-grey', 'Card-blue', 'Card-green');
+      console.log(this.swimlanes.backlog);
+      console.log(target.getAttribute('ref'));
+      if(target.getAttribute('ref')===this.swimlanes.backlog){
+          el.classList.add('Card-grey');
+      }
+      else if(target.getAttribute('ref')===this.swimlanes.inProgress){
+          el.classList.add('Card-blue');
+      } else{
+          el.classList.add('Card-green');
+      }
+
+
   }
+  componentDidMount() {
+    var self = this;
+    Dragula([...document.querySelectorAll('.Swimlane-dragColumn')]).on('drop', function(el, target, source, sibling) {
+        self.handleDrop(el, target, source);
+    });
+ }
   getClients() {
     return [
       ['1','Stark, White and Abbott','Cloned Optimal Architecture', 'in-progress'],
