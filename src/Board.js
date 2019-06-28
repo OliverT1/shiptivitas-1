@@ -26,10 +26,10 @@ export default class Board extends React.Component {
       el.classList.remove('Card-grey', 'Card-blue', 'Card-green');
       console.log(this.swimlanes.backlog);
       console.log(target);
-      if(target===this.swimlanes.backlog){
+      if(target===this.swimlanes.backlog.current){
           el.classList.add('Card-grey');
       }
-      else if(target===this.swimlanes.inProgress){
+      else if(target===this.swimlanes.inProgress.current){
           el.classList.add('Card-blue');
       } else{
           el.classList.add('Card-green');
